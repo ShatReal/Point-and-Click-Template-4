@@ -24,3 +24,7 @@ func _on_settings_pressed() -> void:
 
 func _on_credits_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/meta/credits.tscn")
+
+
+func _on_help_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/meta/help.tscn")

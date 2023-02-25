@@ -55,6 +55,7 @@ func add_item(item: Item) -> void:
 	inventory_vbox.add_child(item_icon)
 	item_icon.set_data(item)
 	item_icon.item_selected.connect(on_item_selected)
+	item_icon.combine_requested.connect(on_item_combine_requested)
 
 
 func show_dialogue(d: Array[DialogueLine]) -> void:
@@ -109,11 +110,12 @@ func on_item_selected(index: int) -> void:
 	selected_item = index
 
 
+# Must be called deferred
 func remove_item(target_id: int) -> void:
 	for i in items.size():
 		if items[i].id == target_id:
 			items.remove_at(i)
-			inventory_vbox.get_child(i).queue_free()
+			inventory_vbox.get_child(i).free()
 			if i == selected_item:
 				selected_item = -1
 			return
@@ -148,3 +150,16 @@ func select_item(index: int) -> void:
 
 func _on_settings_pressed() -> void:
 	Settings.show_settings(true)
+
+
+func on_item_combine_requested(index: int) -> void:
+	if selected_item == -1:
+		return
+	if not get_tree().current_scene is Room:
+		return
+	var actions = items[selected_item].get_combination_from_id(items[index].id, true).duplicate()
+	if actions:
+		get_tree().current_scene.current_actions = actions
+	else:
+		get_tree().current_scene.current_actions = GameState.FALLBACK_COMBINATION.actions.duplicate()
+	get_tree().current_scene.call_deferred("advance_actions")

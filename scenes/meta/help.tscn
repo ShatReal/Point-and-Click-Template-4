@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://bx7i54bg5ofby"]
+
+[ext_resource type="Script" path="res://scenes/meta/help.gd" id="1_k1087"]
+
+[node name="Help" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_k1087")
+
+[node name="Back" type="Button" parent="."]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Back"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -370.5
+offset_top = -26.0
+offset_right = 370.5
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Click on objects to interact with them.
+Right click on objects in the inventory with another object selected to attempt to combine them."
+horizontal_alignment = 1
+
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]

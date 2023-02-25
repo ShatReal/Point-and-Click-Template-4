@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bif4b5hjvur1m"]
+[gd_scene load_steps=3 format=3 uid="uid://mjyf4nnwhbja"]
 
-[ext_resource type="Script" path="res://scenes/game/item_icon.gd" id="1_x3hl3"]
+[ext_resource type="Script" path="res://scenes/autoloads/item_icon.gd" id="1_rhhjs"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y3gdb"]
 draw_center = false
@@ -14,7 +14,7 @@ border_color = Color(1, 1, 1, 1)
 offset_right = 40.0
 offset_bottom = 40.0
 size_flags_vertical = 0
-script = ExtResource("1_x3hl3")
+script = ExtResource("1_rhhjs")
 
 [node name="Icon" type="TextureButton" parent="."]
 custom_minimum_size = Vector2(128, 128)
@@ -29,4 +29,5 @@ layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_y3gdb")
 
+[connection signal="gui_input" from="Icon" to="." method="_on_icon_gui_input"]
 [connection signal="pressed" from="Icon" to="." method="_on_icon_pressed"]

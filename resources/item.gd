@@ -10,8 +10,8 @@ class_name Item
 @export var default_combination: Array[Action]
 
 
-func get_combination_from_id(other_id: int) -> Array[Action]:
+func get_combination_from_id(other_id: int, target_inventory := false) -> Array[Action]:
 	for combination in combinations:
-		if combination.target_id == other_id:
+		if combination.target_id == other_id and combination.target_inventory == target_inventory:
 			return combination.actions
 	return default_combination

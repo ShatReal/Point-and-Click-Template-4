@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://by74d77e4mak3"]
+
+[ext_resource type="Script" path="res://resources/item.gd" id="1_5a228"]
+[ext_resource type="Texture2D" uid="uid://cejas2u1b5wxy" path="res://icon.svg" id="1_jqxmp"]
+
+[resource]
+script = ExtResource("1_5a228")
+id = 2
+name = "Test"
+description = "Test"
+icon = ExtResource("1_jqxmp")
+combinations = Array[Resource("res://resources/combination.gd")]([])
+default_combination = Array[Resource("res://resources/action.gd")]([])

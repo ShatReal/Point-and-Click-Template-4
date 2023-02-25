@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Item" load_steps=24 format=3 uid="uid://cvarx8o2inh3m"]
+[gd_resource type="Resource" script_class="Item" load_steps=30 format=3 uid="uid://cvarx8o2inh3m"]
 
 [ext_resource type="Script" path="res://resources/item.gd" id="1_6d7rx"]
 [ext_resource type="Texture2D" uid="uid://ds7eh7qo4n5oi" path="res://sprites/portraits/player.png" id="1_ixqu7"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" path="res://resources/toggle_interactable_action.gd" id="5_0h7yk"]
 [ext_resource type="Resource" uid="uid://bmse3jpq1c552" path="res://resources/items/orb.tres" id="5_5pqbr"]
 [ext_resource type="Script" path="res://resources/add_item_action.gd" id="6_crxh4"]
+[ext_resource type="Resource" uid="uid://by74d77e4mak3" path="res://resources/items/test.tres" id="8_280xu"]
+[ext_resource type="Script" path="res://resources/remove_item_action.gd" id="9_ashxk"]
 
 [sub_resource type="Resource" id="Resource_ew8p6"]
 script = ExtResource("2_a0iot")
@@ -23,6 +25,7 @@ dialogue = Array[ExtResource("2_a0iot")]([SubResource("Resource_ew8p6")])
 [sub_resource type="Resource" id="Resource_56i42"]
 script = ExtResource("4_tjvaq")
 target_id = 1
+target_inventory = false
 actions = Array[Resource("res://resources/action.gd")]([SubResource("Resource_nty2w")])
 
 [sub_resource type="Resource" id="Resource_r5uws"]
@@ -54,6 +57,7 @@ scene_path = ""
 [sub_resource type="Resource" id="Resource_1l51q"]
 script = ExtResource("4_tjvaq")
 target_id = 4
+target_inventory = false
 actions = Array[Resource("res://resources/action.gd")]([SubResource("Resource_6mhci"), SubResource("Resource_dvsnx"), SubResource("Resource_1f2xe"), SubResource("Resource_ud5kv")])
 
 [sub_resource type="Resource" id="Resource_5be0j"]
@@ -69,7 +73,26 @@ dialogue = Array[ExtResource("2_a0iot")]([SubResource("Resource_5be0j")])
 [sub_resource type="Resource" id="Resource_63whx"]
 script = ExtResource("4_tjvaq")
 target_id = 10
+target_inventory = false
 actions = Array[Resource("res://resources/action.gd")]([SubResource("Resource_iobnr")])
+
+[sub_resource type="Resource" id="Resource_4iivb"]
+script = ExtResource("6_crxh4")
+item = ExtResource("8_280xu")
+
+[sub_resource type="Resource" id="Resource_hxhrr"]
+script = ExtResource("9_ashxk")
+target_id = 0
+
+[sub_resource type="Resource" id="Resource_yup0l"]
+script = ExtResource("9_ashxk")
+target_id = 1
+
+[sub_resource type="Resource" id="Resource_dwryr"]
+script = ExtResource("4_tjvaq")
+target_id = 1
+target_inventory = true
+actions = Array[Resource("res://resources/action.gd")]([SubResource("Resource_4iivb"), SubResource("Resource_hxhrr"), SubResource("Resource_yup0l")])
 
 [sub_resource type="Resource" id="Resource_ck7dk"]
 script = ExtResource("2_a0iot")
@@ -87,5 +110,5 @@ id = 0
 name = "Key"
 description = "A key you found in a crate. What does it open?"
 icon = ExtResource("1_srt08")
-combinations = Array[ExtResource("4_tjvaq")]([SubResource("Resource_56i42"), SubResource("Resource_1l51q"), SubResource("Resource_63whx")])
+combinations = Array[ExtResource("4_tjvaq")]([SubResource("Resource_56i42"), SubResource("Resource_1l51q"), SubResource("Resource_63whx"), SubResource("Resource_dwryr")])
 default_combination = Array[Resource("res://resources/action.gd")]([SubResource("Resource_ug2ar")])

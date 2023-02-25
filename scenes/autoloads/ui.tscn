@@ -1,11 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://022xu553rlat"]
+[gd_scene load_steps=3 format=3 uid="uid://re5xdy4ee7at"]
 
 [ext_resource type="Script" path="res://scenes/autoloads/ui.gd" id="1_02b58"]
-[ext_resource type="PackedScene" uid="uid://bif4b5hjvur1m" path="res://scenes/game/item_icon.tscn" id="2_khlve"]
+[ext_resource type="PackedScene" uid="uid://mjyf4nnwhbja" path="res://scenes/autoloads/item_icon.tscn" id="2_tino5"]
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_02b58")
-ItemIcon = ExtResource("2_khlve")
+ItemIcon = ExtResource("2_tino5")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -56,10 +56,12 @@ offset_bottom = 31.0
 
 [node name="Settings" type="Button" parent="Control/TopLeft"]
 layout_mode = 2
+focus_mode = 0
 text = "Settings"
 
 [node name="SaveLoad" type="Button" parent="Control/TopLeft"]
 layout_mode = 2
+focus_mode = 0
 text = "Save / Load"
 
 [node name="Dialogue" type="PanelContainer" parent="Control"]

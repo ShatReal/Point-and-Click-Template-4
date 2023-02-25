@@ -3,6 +3,7 @@ class_name ItemIcon
 
 
 signal item_selected(index: int)
+signal combine_requested(index: int)
 
 @onready var icon := $Icon
 @onready var selected := $Selected
@@ -30,3 +31,9 @@ func _on_icon_pressed() -> void:
 	toggle_selected(not selected.visible)
 	if not selected.visible:
 		item_selected.emit(-1)
+
+
+func _on_icon_gui_input(event: InputEvent) -> void:
+	if event.is_action_pressed("right_click"):
+		if not selected.visible:
+			combine_requested.emit(get_index())

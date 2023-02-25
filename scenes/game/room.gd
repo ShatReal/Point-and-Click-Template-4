@@ -1,4 +1,5 @@
 extends Node2D
+class_name Room
 
 
 const PICKUP_SOUND_PATH := "res://sounds/pickup.wav"
@@ -38,7 +39,7 @@ func _ready() -> void:
 func on_interactable_interacted(actions: Array[Action], id: int, times_interacted: int) -> void:
 	GameState.rooms_state[scene_file_path][id].times_interacted = times_interacted
 	current_actions = actions.duplicate()
-	advance_actions()
+	call_deferred("advance_actions")
 
 
 func advance_actions() -> void:
@@ -81,10 +82,9 @@ func advance_actions() -> void:
 
 
 func on_interactable_interacted_with_item(id: int) -> void:
-	var actions := UI.items[UI.selected_item].get_combination_from_id(id)
+	var actions = UI.items[UI.selected_item].get_combination_from_id(id)
 	if actions:
 		current_actions = actions.duplicate()
 	else:
-		current_actions = GameState.FALLBACK_COMBINATION.duplicate().actions
-	
-	advance_actions()
+		current_actions = GameState.FALLBACK_COMBINATION.actions.duplicate()
+	call_deferred("advance_actions")
