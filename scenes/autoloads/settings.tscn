@@ -1,0 +1,129 @@
+[gd_scene load_steps=4 format=3 uid="uid://b21tw333e1q5c"]
+
+[ext_resource type="Script" path="res://scenes/autoloads/settings.gd" id="1_olxx6"]
+[ext_resource type="PackedScene" uid="uid://dukp6ho8elhpf" path="res://scenes/autoloads/keybind.tscn" id="2_dbi62"]
+[ext_resource type="Script" path="res://scenes/autoloads/press.gd" id="3_5w81e"]
+
+[node name="Settings" type="PopupPanel"]
+position = Vector2i(288, 162)
+size = Vector2i(576, 324)
+visible = true
+script = ExtResource("1_olxx6")
+Keybind = ExtResource("2_dbi62")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 572.0
+offset_bottom = 320.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Options"
+horizontal_alignment = 1
+
+[node name="Title" type="Button" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Title"
+
+[node name="Reset" type="Button" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Reset"
+
+[node name="HSeparator" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Visual"
+horizontal_alignment = 1
+
+[node name="Fullscreen" type="CheckButton" parent="ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Fullscreen"
+
+[node name="Vsync" type="OptionButton" parent="ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+button_pressed = true
+item_count = 4
+selected = 1
+popup/item_0/text = "Vsync Disabled"
+popup/item_0/id = 0
+popup/item_1/text = "Vsync Enabled"
+popup/item_1/id = 1
+popup/item_2/text = "Vsync Adaptive"
+popup/item_2/id = 2
+popup/item_3/text = "Vsync Mailbox"
+popup/item_3/id = 3
+
+[node name="HSeparator2" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Audio"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(49, 0)
+layout_mode = 2
+text = "Music"
+
+[node name="Music" type="HSlider" parent="ScrollContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Sound"
+
+[node name="Sound" type="HSlider" parent="ScrollContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="HSeparator3" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Keybinds"
+horizontal_alignment = 1
+
+[node name="Press" type="AcceptDialog" parent="."]
+size = Vector2i(162, 100)
+visible = true
+dialog_text = "[Press any button!]"
+script = ExtResource("3_5w81e")
+
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Title" to="." method="_on_title_pressed"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Reset" to="." method="_on_reset_pressed"]
+[connection signal="toggled" from="ScrollContainer/VBoxContainer/Fullscreen" to="." method="_on_fullscreen_toggled"]
+[connection signal="item_selected" from="ScrollContainer/VBoxContainer/Vsync" to="." method="_on_vsync_item_selected"]
+[connection signal="value_changed" from="ScrollContainer/VBoxContainer/HBoxContainer/Music" to="." method="_on_music_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/VBoxContainer/HBoxContainer2/Sound" to="." method="_on_sound_value_changed"]
+[connection signal="confirmed" from="Press" to="." method="_on_press_confirmed"]
+[connection signal="event_selected" from="Press" to="." method="_on_press_event_selected"]
+[connection signal="visibility_changed" from="Press" to="Press" method="_on_visibility_changed"]

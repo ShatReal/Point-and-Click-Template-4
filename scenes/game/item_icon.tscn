@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://bif4b5hjvur1m"]
+
+[ext_resource type="Script" path="res://scenes/game/item_icon.gd" id="1_x3hl3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y3gdb"]
+draw_center = false
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 1, 1, 1)
+
+[node name="ItemIcon" type="PanelContainer" groups=["item_icons"]]
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_vertical = 0
+script = ExtResource("1_x3hl3")
+
+[node name="Icon" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Selected" type="Panel" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_y3gdb")
+
+[connection signal="pressed" from="Icon" to="." method="_on_icon_pressed"]

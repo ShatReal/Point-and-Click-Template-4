@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqn4wfsuigdng"]
+
+[ext_resource type="Script" path="res://scenes/game/interactable.gd" id="1_7ebqx"]
+
+[node name="Interactable" type="TextureButton" groups=["interactables"]]
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_default_cursor_shape = 2
+script = ExtResource("1_7ebqx")
+id = null
+actions = null
+times_interacted = null

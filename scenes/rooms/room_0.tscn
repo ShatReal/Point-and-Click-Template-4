@@ -1,0 +1,145 @@
+[gd_scene load_steps=32 format=3 uid="uid://byhq5fexe5j6d"]
+
+[ext_resource type="PackedScene" uid="uid://dwk1n2gr3od4y" path="res://scenes/game/room.tscn" id="1_s7j3d"]
+[ext_resource type="Texture2D" uid="uid://duk4rsrrw7xa8" path="res://sprites/rooms/room_0.png" id="2_ewee0"]
+[ext_resource type="PackedScene" uid="uid://dqn4wfsuigdng" path="res://scenes/game/interactable.tscn" id="3_uaoub"]
+[ext_resource type="Texture2D" uid="uid://bgbaqtpvqir4x" path="res://sprites/interactables/crate_closed.png" id="4_8g4an"]
+[ext_resource type="Texture2D" uid="uid://ds7eh7qo4n5oi" path="res://sprites/portraits/player.png" id="4_78rv1"]
+[ext_resource type="Script" path="res://resources/dialogue_action.gd" id="4_dpkuu"]
+[ext_resource type="Script" path="res://resources/dialogue_line.gd" id="4_s31qw"]
+[ext_resource type="Resource" uid="uid://cvarx8o2inh3m" path="res://resources/items/key.tres" id="4_xfb07"]
+[ext_resource type="Script" path="res://resources/add_item_action.gd" id="5_6eein"]
+[ext_resource type="Script" path="res://resources/change_scene_action.gd" id="6_erpn7"]
+[ext_resource type="Script" path="res://resources/action_group.gd" id="7_835ja"]
+[ext_resource type="Script" path="res://resources/toggle_interactable_action.gd" id="10_2g0b7"]
+[ext_resource type="Texture2D" uid="uid://kvcht6o53yy6" path="res://sprites/interactables/crate_opened.png" id="11_gvcnh"]
+[ext_resource type="Texture2D" uid="uid://bc73y4gk027ek" path="res://sprites/items/orb.png" id="14_sdt32"]
+
+[sub_resource type="Resource" id="Resource_natw4"]
+script = ExtResource("4_s31qw")
+title = "Player"
+portrait = ExtResource("4_78rv1")
+speech = "It's a crate. There's a key inside."
+
+[sub_resource type="Resource" id="Resource_qrf6x"]
+script = ExtResource("4_dpkuu")
+dialogue = Array[ExtResource("4_s31qw")]([SubResource("Resource_natw4")])
+
+[sub_resource type="Resource" id="Resource_4bc0v"]
+script = ExtResource("5_6eein")
+item = ExtResource("4_xfb07")
+
+[sub_resource type="Resource" id="Resource_kvlwr"]
+script = ExtResource("10_2g0b7")
+target_id = 0
+show = false
+scene_path = ""
+
+[sub_resource type="Resource" id="Resource_2icre"]
+script = ExtResource("10_2g0b7")
+target_id = 1
+show = true
+scene_path = ""
+
+[sub_resource type="Resource" id="Resource_numcu"]
+script = ExtResource("7_835ja")
+actions = Array[Resource("res://resources/action.gd")]([SubResource("Resource_qrf6x"), SubResource("Resource_4bc0v"), SubResource("Resource_kvlwr"), SubResource("Resource_2icre")])
+
+[sub_resource type="Resource" id="Resource_qx0bj"]
+script = ExtResource("4_s31qw")
+title = "Player"
+portrait = ExtResource("4_78rv1")
+speech = "It's a crate. It's been opened."
+
+[sub_resource type="Resource" id="Resource_judhk"]
+script = ExtResource("4_dpkuu")
+dialogue = Array[ExtResource("4_s31qw")]([SubResource("Resource_qx0bj")])
+
+[sub_resource type="Resource" id="Resource_ws37i"]
+script = ExtResource("7_835ja")
+actions = Array[Resource("res://resources/action.gd")]([SubResource("Resource_judhk")])
+
+[sub_resource type="Resource" id="Resource_y5klp"]
+script = ExtResource("6_erpn7")
+new_scene = "res://scenes/rooms/room_1.tscn"
+
+[sub_resource type="Resource" id="Resource_wgdgc"]
+script = ExtResource("7_835ja")
+actions = Array[Resource("res://resources/action.gd")]([SubResource("Resource_y5klp")])
+
+[sub_resource type="Resource" id="Resource_rcdxw"]
+script = ExtResource("4_s31qw")
+title = "Player"
+portrait = ExtResource("4_78rv1")
+speech = "It's an altar."
+
+[sub_resource type="Resource" id="Resource_m3i8i"]
+script = ExtResource("4_dpkuu")
+dialogue = Array[ExtResource("4_s31qw")]([SubResource("Resource_rcdxw")])
+
+[sub_resource type="Resource" id="Resource_l7cic"]
+script = ExtResource("7_835ja")
+actions = Array[Resource("res://resources/action.gd")]([SubResource("Resource_m3i8i")])
+
+[sub_resource type="Resource" id="Resource_8uiew"]
+script = ExtResource("4_s31qw")
+title = "Player"
+portrait = ExtResource("4_78rv1")
+speech = "It's a shiny orb!"
+
+[sub_resource type="Resource" id="Resource_cw2ci"]
+script = ExtResource("4_dpkuu")
+dialogue = Array[ExtResource("4_s31qw")]([SubResource("Resource_8uiew")])
+
+[sub_resource type="Resource" id="Resource_thl1s"]
+script = ExtResource("7_835ja")
+actions = Array[Resource("res://resources/action.gd")]([SubResource("Resource_cw2ci")])
+
+[node name="Room0" instance=ExtResource("1_s7j3d")]
+
+[node name="Background" parent="." index="0"]
+texture = ExtResource("2_ewee0")
+
+[node name="Crate" parent="Interactables" index="0" instance=ExtResource("3_uaoub")]
+offset_left = 58.0
+offset_top = 420.0
+offset_right = 203.0
+offset_bottom = 538.0
+texture_normal = ExtResource("4_8g4an")
+actions = Array[ExtResource("7_835ja")]([SubResource("Resource_numcu")])
+
+[node name="CrateOpened" parent="Interactables" index="1" instance=ExtResource("3_uaoub")]
+visible = false
+offset_left = 58.0
+offset_top = 420.0
+offset_right = 203.0
+offset_bottom = 538.0
+texture_normal = ExtResource("11_gvcnh")
+id = 1
+actions = Array[ExtResource("7_835ja")]([SubResource("Resource_ws37i")])
+
+[node name="Door" parent="Interactables" index="2" instance=ExtResource("3_uaoub")]
+offset_left = 525.0
+offset_top = 247.0
+offset_right = 604.0
+offset_bottom = 358.0
+id = 2
+actions = Array[ExtResource("7_835ja")]([SubResource("Resource_wgdgc")])
+
+[node name="Altar" parent="Interactables" index="3" instance=ExtResource("3_uaoub")]
+offset_left = 483.0
+offset_top = 385.0
+offset_right = 654.0
+offset_bottom = 602.0
+id = 6
+actions = Array[ExtResource("7_835ja")]([SubResource("Resource_l7cic")])
+
+[node name="Orb" parent="Interactables" index="4" instance=ExtResource("3_uaoub")]
+visible = false
+offset_left = 506.0
+offset_top = 286.0
+offset_right = 634.0
+offset_bottom = 414.0
+texture_normal = ExtResource("14_sdt32")
+id = 7
+actions = Array[ExtResource("7_835ja")]([SubResource("Resource_thl1s")])

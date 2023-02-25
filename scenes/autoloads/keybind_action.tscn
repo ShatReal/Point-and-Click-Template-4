@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctrpo0doxvdk6"]
+
+[ext_resource type="Script" path="res://scenes/autoloads/keybind_action.gd" id="1_hb1uc"]
+
+[node name="KeybindAction" type="HBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_hb1uc")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "Action"
+
+[node name="Delete" type="Button" parent="."]
+layout_mode = 2
+text = "Delete"
+
+[connection signal="pressed" from="Delete" to="." method="_on_delete_pressed"]

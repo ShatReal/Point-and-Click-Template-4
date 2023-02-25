@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Combination" load_steps=7 format=3 uid="uid://ckiai8sr85olb"]
+
+[ext_resource type="Script" path="res://resources/combination.gd" id="1_3gg0f"]
+[ext_resource type="Texture2D" uid="uid://ds7eh7qo4n5oi" path="res://sprites/portraits/player.png" id="1_it8y1"]
+[ext_resource type="Script" path="res://resources/dialogue_line.gd" id="2_lt7hi"]
+[ext_resource type="Script" path="res://resources/dialogue_action.gd" id="3_v52su"]
+
+[sub_resource type="Resource" id="Resource_rxexh"]
+script = ExtResource("2_lt7hi")
+title = "Player"
+portrait = ExtResource("1_it8y1")
+speech = "This doesn't work on that."
+
+[sub_resource type="Resource" id="Resource_8y83u"]
+script = ExtResource("3_v52su")
+dialogue = Array[ExtResource("2_lt7hi")]([SubResource("Resource_rxexh")])
+
+[resource]
+script = ExtResource("1_3gg0f")
+target_id = 0
+actions = Array[Resource("res://resources/action.gd")]([SubResource("Resource_8y83u")])

@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://brvaql73aerrv"]
+
+[ext_resource type="Script" path="res://scenes/meta/credits.gd" id="1_wvp2m"]
+
+[node name="Credits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wvp2m")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -46.0
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[center]Credits
+[url=https://the-outlander.itch.io/free-dungeon-backgrounds]Dungeon Backgrounds[/url]
+[url=https://coraxdigitalart.itch.io/500-fantasy-character-portraits-realistic-human-heroes]Portrait[/url]
+All other images in public domain[/center]"
+fit_content = true
+
+[node name="Back" type="Button" parent="."]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Back"
+
+[connection signal="meta_clicked" from="RichTextLabel" to="." method="_on_rich_text_label_meta_clicked"]
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]

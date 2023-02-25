@@ -1,0 +1,91 @@
+[gd_resource type="Resource" script_class="Item" load_steps=24 format=3 uid="uid://cvarx8o2inh3m"]
+
+[ext_resource type="Script" path="res://resources/item.gd" id="1_6d7rx"]
+[ext_resource type="Texture2D" uid="uid://ds7eh7qo4n5oi" path="res://sprites/portraits/player.png" id="1_ixqu7"]
+[ext_resource type="Texture2D" uid="uid://cj2j8qxx0er8k" path="res://sprites/items/key.png" id="1_srt08"]
+[ext_resource type="Script" path="res://resources/dialogue_line.gd" id="2_a0iot"]
+[ext_resource type="Script" path="res://resources/dialogue_action.gd" id="3_rjqtv"]
+[ext_resource type="Script" path="res://resources/combination.gd" id="4_tjvaq"]
+[ext_resource type="Script" path="res://resources/toggle_interactable_action.gd" id="5_0h7yk"]
+[ext_resource type="Resource" uid="uid://bmse3jpq1c552" path="res://resources/items/orb.tres" id="5_5pqbr"]
+[ext_resource type="Script" path="res://resources/add_item_action.gd" id="6_crxh4"]
+
+[sub_resource type="Resource" id="Resource_ew8p6"]
+script = ExtResource("2_a0iot")
+title = "Player"
+portrait = ExtResource("1_ixqu7")
+speech = "The key came from that crate."
+
+[sub_resource type="Resource" id="Resource_nty2w"]
+script = ExtResource("3_rjqtv")
+dialogue = Array[ExtResource("2_a0iot")]([SubResource("Resource_ew8p6")])
+
+[sub_resource type="Resource" id="Resource_56i42"]
+script = ExtResource("4_tjvaq")
+target_id = 1
+actions = Array[Resource("res://resources/action.gd")]([SubResource("Resource_nty2w")])
+
+[sub_resource type="Resource" id="Resource_r5uws"]
+script = ExtResource("2_a0iot")
+title = "Player"
+portrait = ExtResource("1_ixqu7")
+speech = "The key fits this chest. Let me open it."
+
+[sub_resource type="Resource" id="Resource_6mhci"]
+script = ExtResource("3_rjqtv")
+dialogue = Array[ExtResource("2_a0iot")]([SubResource("Resource_r5uws")])
+
+[sub_resource type="Resource" id="Resource_dvsnx"]
+script = ExtResource("6_crxh4")
+item = ExtResource("5_5pqbr")
+
+[sub_resource type="Resource" id="Resource_1f2xe"]
+script = ExtResource("5_0h7yk")
+target_id = 4
+show = false
+scene_path = ""
+
+[sub_resource type="Resource" id="Resource_ud5kv"]
+script = ExtResource("5_0h7yk")
+target_id = 5
+show = true
+scene_path = ""
+
+[sub_resource type="Resource" id="Resource_1l51q"]
+script = ExtResource("4_tjvaq")
+target_id = 4
+actions = Array[Resource("res://resources/action.gd")]([SubResource("Resource_6mhci"), SubResource("Resource_dvsnx"), SubResource("Resource_1f2xe"), SubResource("Resource_ud5kv")])
+
+[sub_resource type="Resource" id="Resource_5be0j"]
+script = ExtResource("2_a0iot")
+title = "Player"
+portrait = ExtResource("1_ixqu7")
+speech = "The door has no keyhole; I can't use the key to unlock the door."
+
+[sub_resource type="Resource" id="Resource_iobnr"]
+script = ExtResource("3_rjqtv")
+dialogue = Array[ExtResource("2_a0iot")]([SubResource("Resource_5be0j")])
+
+[sub_resource type="Resource" id="Resource_63whx"]
+script = ExtResource("4_tjvaq")
+target_id = 10
+actions = Array[Resource("res://resources/action.gd")]([SubResource("Resource_iobnr")])
+
+[sub_resource type="Resource" id="Resource_ck7dk"]
+script = ExtResource("2_a0iot")
+title = "Player"
+portrait = ExtResource("1_ixqu7")
+speech = "I don't think the key will open that."
+
+[sub_resource type="Resource" id="Resource_ug2ar"]
+script = ExtResource("3_rjqtv")
+dialogue = Array[ExtResource("2_a0iot")]([SubResource("Resource_ck7dk")])
+
+[resource]
+script = ExtResource("1_6d7rx")
+id = 0
+name = "Key"
+description = "A key you found in a crate. What does it open?"
+icon = ExtResource("1_srt08")
+combinations = Array[ExtResource("4_tjvaq")]([SubResource("Resource_56i42"), SubResource("Resource_1l51q"), SubResource("Resource_63whx")])
+default_combination = Array[Resource("res://resources/action.gd")]([SubResource("Resource_ug2ar")])

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwk1n2gr3od4y"]
+
+[ext_resource type="Script" path="res://scenes/game/room.gd" id="1_t7euk"]
+
+[node name="Room" type="Node2D"]
+script = ExtResource("1_t7euk")
+
+[node name="Background" type="Sprite2D" parent="."]
+centered = false
+
+[node name="Interactables" type="Node2D" parent="."]

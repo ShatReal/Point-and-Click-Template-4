@@ -1,0 +1,123 @@
+[gd_scene load_steps=26 format=3 uid="uid://cccb33b12w5rp"]
+
+[ext_resource type="PackedScene" uid="uid://dwk1n2gr3od4y" path="res://scenes/game/room.tscn" id="1_hwuv7"]
+[ext_resource type="Texture2D" uid="uid://cocl543y34cip" path="res://sprites/rooms/room_1.png" id="2_dk4l5"]
+[ext_resource type="PackedScene" uid="uid://dqn4wfsuigdng" path="res://scenes/game/interactable.tscn" id="3_dm8js"]
+[ext_resource type="Script" path="res://resources/change_scene_action.gd" id="4_varct"]
+[ext_resource type="Script" path="res://resources/action_group.gd" id="5_7f8e0"]
+[ext_resource type="Texture2D" uid="uid://ceiukmg84ii01" path="res://sprites/interactables/chest.png" id="6_u6leo"]
+[ext_resource type="Texture2D" uid="uid://ds7eh7qo4n5oi" path="res://sprites/portraits/player.png" id="7_ek6mu"]
+[ext_resource type="Script" path="res://resources/dialogue_line.gd" id="8_utgst"]
+[ext_resource type="Script" path="res://resources/dialogue_action.gd" id="9_qnaun"]
+[ext_resource type="Texture2D" uid="uid://c5sr18s4y7djw" path="res://sprites/interactables/chest_opened.png" id="10_upm6w"]
+[ext_resource type="Texture2D" uid="uid://do83ukxs2id36" path="res://sprites/interactables/door_closed.png" id="11_qxich"]
+[ext_resource type="Texture2D" uid="uid://dncgijueaxcck" path="res://sprites/interactables/door_open.png" id="12_vysgt"]
+
+[sub_resource type="Resource" id="Resource_3yp12"]
+script = ExtResource("4_varct")
+new_scene = "res://scenes/rooms/room_0.tscn"
+
+[sub_resource type="Resource" id="Resource_oru7c"]
+script = ExtResource("5_7f8e0")
+actions = Array[Resource("res://resources/action.gd")]([SubResource("Resource_3yp12")])
+
+[sub_resource type="Resource" id="Resource_475m5"]
+script = ExtResource("8_utgst")
+title = "Player"
+portrait = ExtResource("7_ek6mu")
+speech = "It's a chest. It's locked."
+
+[sub_resource type="Resource" id="Resource_6nqa4"]
+script = ExtResource("9_qnaun")
+dialogue = Array[ExtResource("8_utgst")]([SubResource("Resource_475m5")])
+
+[sub_resource type="Resource" id="Resource_0cxxp"]
+script = ExtResource("5_7f8e0")
+actions = Array[Resource("res://resources/action.gd")]([SubResource("Resource_6nqa4")])
+
+[sub_resource type="Resource" id="Resource_4fqid"]
+script = ExtResource("8_utgst")
+title = "Player"
+portrait = ExtResource("7_ek6mu")
+speech = "It's a chest. It's open and empty now."
+
+[sub_resource type="Resource" id="Resource_tiwsy"]
+script = ExtResource("9_qnaun")
+dialogue = Array[ExtResource("8_utgst")]([SubResource("Resource_4fqid")])
+
+[sub_resource type="Resource" id="Resource_cgawo"]
+script = ExtResource("5_7f8e0")
+actions = Array[Resource("res://resources/action.gd")]([SubResource("Resource_tiwsy")])
+
+[sub_resource type="Resource" id="Resource_7yimw"]
+script = ExtResource("8_utgst")
+title = "Player"
+portrait = ExtResource("7_ek6mu")
+speech = "The door is locked. There's no keyhole."
+
+[sub_resource type="Resource" id="Resource_n3yub"]
+script = ExtResource("9_qnaun")
+dialogue = Array[ExtResource("8_utgst")]([SubResource("Resource_7yimw")])
+
+[sub_resource type="Resource" id="Resource_6ght5"]
+script = ExtResource("5_7f8e0")
+actions = Array[Resource("res://resources/action.gd")]([SubResource("Resource_n3yub")])
+
+[sub_resource type="Resource" id="Resource_j2lx4"]
+script = ExtResource("4_varct")
+new_scene = "res://scenes/rooms/room_2.tscn"
+
+[sub_resource type="Resource" id="Resource_21suq"]
+script = ExtResource("5_7f8e0")
+actions = Array[Resource("res://resources/action.gd")]([SubResource("Resource_j2lx4")])
+
+[node name="Room1" instance=ExtResource("1_hwuv7")]
+
+[node name="Background" parent="." index="0"]
+texture = ExtResource("2_dk4l5")
+
+[node name="Door" parent="Interactables" index="0" instance=ExtResource("3_dm8js")]
+offset_left = 874.0
+offset_top = 307.0
+offset_right = 952.0
+offset_bottom = 571.0
+id = 3
+actions = Array[ExtResource("5_7f8e0")]([SubResource("Resource_oru7c")])
+
+[node name="Chest" parent="Interactables" index="1" instance=ExtResource("3_dm8js")]
+offset_left = 155.0
+offset_top = 429.0
+offset_right = 313.0
+offset_bottom = 586.0
+texture_normal = ExtResource("6_u6leo")
+id = 4
+actions = Array[ExtResource("5_7f8e0")]([SubResource("Resource_0cxxp")])
+
+[node name="ChestOpened" parent="Interactables" index="2" instance=ExtResource("3_dm8js")]
+visible = false
+offset_left = 81.0
+offset_top = 455.0
+offset_right = 313.0
+offset_bottom = 612.0
+texture_normal = ExtResource("10_upm6w")
+id = 5
+actions = Array[ExtResource("5_7f8e0")]([SubResource("Resource_cgawo")])
+
+[node name="DoorClosed" parent="Interactables" index="3" instance=ExtResource("3_dm8js")]
+offset_left = 492.0
+offset_top = 161.0
+offset_right = 673.0
+offset_bottom = 444.0
+texture_normal = ExtResource("11_qxich")
+id = 10
+actions = Array[ExtResource("5_7f8e0")]([SubResource("Resource_6ght5")])
+
+[node name="DoorOpen" parent="Interactables" index="4" instance=ExtResource("3_dm8js")]
+visible = false
+offset_left = 492.0
+offset_top = 194.0
+offset_right = 674.0
+offset_bottom = 442.0
+texture_normal = ExtResource("12_vysgt")
+id = 11
+actions = Array[ExtResource("5_7f8e0")]([SubResource("Resource_21suq")])

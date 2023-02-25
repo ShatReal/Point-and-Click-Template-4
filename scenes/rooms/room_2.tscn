@@ -1,0 +1,59 @@
+[gd_scene load_steps=16 format=3 uid="uid://253jmmre6gyj"]
+
+[ext_resource type="PackedScene" uid="uid://dwk1n2gr3od4y" path="res://scenes/game/room.tscn" id="1_ndwlw"]
+[ext_resource type="Texture2D" uid="uid://t3i2igjjostg" path="res://sprites/rooms/room_2.png" id="2_5h0oe"]
+[ext_resource type="PackedScene" uid="uid://dqn4wfsuigdng" path="res://scenes/game/interactable.tscn" id="3_jmygi"]
+[ext_resource type="Texture2D" uid="uid://gu3milxc4t3h" path="res://sprites/interactables/treasure_chest.png" id="4_gy41r"]
+[ext_resource type="Texture2D" uid="uid://ds7eh7qo4n5oi" path="res://sprites/portraits/player.png" id="5_7ndug"]
+[ext_resource type="Script" path="res://resources/dialogue_line.gd" id="6_2ncpr"]
+[ext_resource type="Script" path="res://resources/dialogue_action.gd" id="7_dw1qb"]
+[ext_resource type="Script" path="res://resources/change_scene_action.gd" id="8_am2lp"]
+[ext_resource type="Script" path="res://resources/action_group.gd" id="8_ga6w4"]
+
+[sub_resource type="Resource" id="Resource_dyoq3"]
+script = ExtResource("6_2ncpr")
+title = "Player"
+portrait = ExtResource("5_7ndug")
+speech = "I did it! I found the treasure!"
+
+[sub_resource type="Resource" id="Resource_0fnr5"]
+script = ExtResource("7_dw1qb")
+dialogue = Array[ExtResource("6_2ncpr")]([SubResource("Resource_dyoq3")])
+
+[sub_resource type="Resource" id="Resource_6mj57"]
+script = ExtResource("8_am2lp")
+new_scene = "res://scenes/meta/end.tscn"
+
+[sub_resource type="Resource" id="Resource_coajn"]
+script = ExtResource("8_ga6w4")
+actions = Array[Resource("res://resources/action.gd")]([SubResource("Resource_0fnr5"), SubResource("Resource_6mj57")])
+
+[sub_resource type="Resource" id="Resource_em56x"]
+script = ExtResource("8_am2lp")
+new_scene = "res://scenes/rooms/room_1.tscn"
+
+[sub_resource type="Resource" id="Resource_yngmn"]
+script = ExtResource("8_ga6w4")
+actions = Array[Resource("res://resources/action.gd")]([SubResource("Resource_em56x")])
+
+[node name="Room2" instance=ExtResource("1_ndwlw")]
+
+[node name="Background" parent="." index="0"]
+texture = ExtResource("2_5h0oe")
+
+[node name="Treasure" parent="Interactables" index="0" instance=ExtResource("3_jmygi")]
+offset_left = 202.0
+offset_top = 271.0
+offset_right = 430.0
+offset_bottom = 487.0
+texture_normal = ExtResource("4_gy41r")
+stretch_mode = 5
+id = 8
+actions = Array[ExtResource("8_ga6w4")]([SubResource("Resource_coajn")])
+
+[node name="Back" parent="Interactables" index="1" instance=ExtResource("3_jmygi")]
+offset_top = 559.0
+offset_right = 1154.0
+offset_bottom = 646.0
+id = 9
+actions = Array[ExtResource("8_ga6w4")]([SubResource("Resource_yngmn")])

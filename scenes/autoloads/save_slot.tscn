@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://nfqyxnke21fw"]
+
+[ext_resource type="Script" path="res://scenes/autoloads/save_slot.gd" id="1_i81hd"]
+
+[node name="SaveSlot" type="MenuButton"]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "XXXX/XX/XX XX:XX:XX"
+item_count = 3
+popup/item_0/text = "Overwrite"
+popup/item_0/id = 0
+popup/item_1/text = "Load"
+popup/item_1/id = 1
+popup/item_2/text = "Delete"
+popup/item_2/id = 2
+script = ExtResource("1_i81hd")
