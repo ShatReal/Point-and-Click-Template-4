@@ -13,7 +13,7 @@ config_version=5
 config/name="Point and Click Template 4"
 run/main_scene="res://scenes/meta/title.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://sprites/items/orb.png"
 
 [autoload]
 
