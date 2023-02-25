@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Item" load_steps=16 format=3 uid="uid://bmse3jpq1c552"]
+[gd_resource type="Resource" script_class="Item" load_steps=18 format=3 uid="uid://bmse3jpq1c552"]
 
 [ext_resource type="Texture2D" uid="uid://ds7eh7qo4n5oi" path="res://sprites/portraits/player.png" id="1_6pdv0"]
 [ext_resource type="Script" path="res://resources/item.gd" id="1_d7oxd"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://resources/toggle_interactable_action.gd" id="4_hn4tr"]
 [ext_resource type="Script" path="res://resources/remove_item_action.gd" id="5_7grnx"]
 [ext_resource type="Script" path="res://resources/combination.gd" id="5_xb64n"]
+[ext_resource type="Script" path="res://resources/play_sound_action.gd" id="6_q0oql"]
 
 [sub_resource type="Resource" id="Resource_jj5bf"]
 script = ExtResource("2_21ygs")
@@ -41,10 +42,14 @@ target_id = 11
 show = true
 scene_path = "res://scenes/rooms/room_1.tscn"
 
+[sub_resource type="Resource" id="Resource_gemb2"]
+script = ExtResource("6_q0oql")
+sound_path = "res://sounds/place_orb.wav"
+
 [sub_resource type="Resource" id="Resource_s7jk3"]
 script = ExtResource("5_xb64n")
 target_id = 6
-actions = Array[Resource("res://resources/action.gd")]([SubResource("Resource_rfts6"), SubResource("Resource_eik82"), SubResource("Resource_0kul6"), SubResource("Resource_cixiu"), SubResource("Resource_ri0ec")])
+actions = Array[Resource("res://resources/action.gd")]([SubResource("Resource_rfts6"), SubResource("Resource_eik82"), SubResource("Resource_0kul6"), SubResource("Resource_cixiu"), SubResource("Resource_ri0ec"), SubResource("Resource_gemb2")])
 
 [resource]
 script = ExtResource("1_d7oxd")

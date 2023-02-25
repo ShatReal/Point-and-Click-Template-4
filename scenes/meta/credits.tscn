@@ -26,7 +26,8 @@ bbcode_enabled = true
 text = "[center]Credits
 [url=https://the-outlander.itch.io/free-dungeon-backgrounds]Dungeon Backgrounds[/url]
 [url=https://coraxdigitalart.itch.io/500-fantasy-character-portraits-realistic-human-heroes]Portrait[/url]
-All other images in public domain[/center]"
+All other images in public domain
+[url=https://joshuuu.itch.io/short-loopable-background-music]Music[/url][/center]"
 fit_content = true
 
 [node name="Back" type="Button" parent="."]

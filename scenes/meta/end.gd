@@ -2,6 +2,7 @@ extends Control
 
 
 func _ready() -> void:
+	Audio.play_music("res://music/victory.ogg")
 	UI.toggle_ui(false)
 
 

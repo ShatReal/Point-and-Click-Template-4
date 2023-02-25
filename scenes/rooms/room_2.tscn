@@ -37,6 +37,7 @@ script = ExtResource("8_ga6w4")
 actions = Array[Resource("res://resources/action.gd")]([SubResource("Resource_em56x")])
 
 [node name="Room2" instance=ExtResource("1_ndwlw")]
+music_path = "res://music/temple.ogg"
 
 [node name="Background" parent="." index="0"]
 texture = ExtResource("2_5h0oe")

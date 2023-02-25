@@ -1,10 +1,15 @@
 extends Node2D
 
 
+const PICKUP_SOUND_PATH := "res://sounds/pickup.wav"
+@export_file("*.ogg", "*.wav", "*.mp3") var music_path: String
+
 var current_actions: Array[Action]
 
 
 func _ready() -> void:
+	if music_path:
+		Audio.play_music(music_path)
 	UI.toggle_ui(true)
 	for interactable in $Interactables.get_children():
 		interactable.interacted.connect(on_interactable_interacted)
@@ -41,6 +46,7 @@ func advance_actions() -> void:
 		return
 	var action: Action = current_actions.pop_front()
 	if action is AddItemAction:
+		Audio.play_sound(PICKUP_SOUND_PATH)
 		UI.add_item(action.item)
 		UI.deselect_item()
 		advance_actions()
@@ -68,6 +74,9 @@ func advance_actions() -> void:
 	elif action is RemoveItemAction:
 		UI.deselect_item()
 		UI.remove_item(action.target_id)
+		advance_actions()
+	elif action is PlaySoundAction:
+		Audio.play_sound(action.sound_path)
 		advance_actions()
 
 

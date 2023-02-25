@@ -21,6 +21,7 @@ UI="*res://scenes/autoloads/ui.tscn"
 GameState="*res://scenes/autoloads/game_state.gd"
 SaveLoad="*res://scenes/autoloads/save_load.tscn"
 Settings="*res://scenes/autoloads/settings.tscn"
+Audio="*res://scenes/autoloads/audio.tscn"
 
 [display]
 

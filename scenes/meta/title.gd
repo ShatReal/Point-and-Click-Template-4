@@ -3,6 +3,7 @@ extends Control
 
 func _ready() -> void:
 	UI.toggle_ui(false)
+	Audio.play_music("res://music/puzzles.ogg")
 
 
 func _on_start_pressed() -> void:
