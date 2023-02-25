@@ -34,5 +34,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="AcceptDialog" type="AcceptDialog" parent="."]
+size = Vector2i(189, 100)
+dialog_text = "Error loading save file!"
+
 [connection signal="pressed" from="VBoxContainer/New" to="." method="_on_new_pressed"]
 [connection signal="pressed" from="VBoxContainer/DeleteAll" to="." method="_on_delete_all_pressed"]

@@ -39,6 +39,7 @@ func _ready() -> void:
 				s.delete.connect(on_slot_delete)
 				i += 1
 			else:
+				push_warning("Invalid date for save file %s!" % (PATH + saves[i]))
 				saves.remove_at(i)
 		else:
 			saves.remove_at(i)
@@ -70,7 +71,10 @@ func save(path: String, date: Dictionary) -> void:
 	config.set_value("metadata", "time", date)
 	config.set_value("data", "rooms_state", GameState.rooms_state)
 	config.set_value("data", "current_scene", get_tree().current_scene.scene_file_path)
-	config.set_value("data", "inventory", UI.items)
+	var inventory: Array[String] = []
+	for item in UI.items:
+		inventory.append(item.resource_path)
+	config.set_value("data", "inventory", inventory)
 	config.set_value("data", "selected_item", UI.selected_item)
 	config.save(path)
 
@@ -94,16 +98,18 @@ func on_slot_overwrite(i: int) -> void:
 
 
 func on_slot_load(i: int) -> void:
-	var config := ConfigFile.new()
-	if config.load(PATH + saves[i]) != OK:
-		push_warning("Error loading save file at %s!" % PATH + saves[i])
+	if not validate_save(PATH + saves[i]):
+		saves.remove_at(i)
+		%Slots.get_child(i).queue_free()
+		$AcceptDialog.show()
 		return
 	hide()
 	UI.clear()
-	var rooms_state: Dictionary = config.get_value("data", "rooms_state")
-	GameState.rooms_state = rooms_state
+	var config := ConfigFile.new()
+	config.load(PATH + saves[i])
+	GameState.rooms_state = config.get_value("data", "rooms_state")
 	for item in config.get_value("data", "inventory"):
-		UI.add_item(item)
+		UI.add_item(load(item))
 	UI.select_item(config.get_value("data", "selected_item"))
 	var current_scene: String = config.get_value("data", "current_scene")
 	get_tree().change_scene_to_file(current_scene)
@@ -113,3 +119,29 @@ func on_slot_delete(i: int) -> void:
 	DirAccess.remove_absolute(PATH + saves[i])
 	saves.remove_at(i)
 	%Slots.get_child(i).queue_free()
+
+
+func validate_save(path: String) -> bool:
+	var config := ConfigFile.new()
+	if not config.load(path) == OK:
+		push_warning("Could not load file at %s!" % path)
+		return false
+	var rooms_state = config.get_value("data", "rooms_state")
+	if not rooms_state is Dictionary:
+		push_warning('"rooms_state" is not a Dictionary for save at %s!' % path)
+		return false
+	var inventory = config.get_value("data", "inventory")
+	if not inventory is Array[String]:
+		push_warning('"inventory" is not an Array for save at %s!' % path)
+		return false
+	for p in inventory:
+		if not ResourceLoader.exists(p, "Item"):
+			push_warning('Path %s in "inventory" does not exist for save at %s!' % [p, path])
+			return false
+	var selected_item = config.get_value("data", "selected_item")
+	if not selected_item is int or selected_item < -2 or selected_item > inventory.size() - 1:
+		push_warning('"selected_item" has invalid data for save at %s!' % path)
+	var current_scene = config.get_value("data", "current_scene")
+	if not current_scene is String or not ResourceLoader.exists(current_scene, "PackedScene"):
+		push_warning('"current_scene" has invalid data for save at %s!' % path)
+	return true

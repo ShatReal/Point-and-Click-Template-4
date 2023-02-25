@@ -18,4 +18,5 @@ dialogue = Array[ExtResource("2_lt7hi")]([SubResource("Resource_rxexh")])
 [resource]
 script = ExtResource("1_3gg0f")
 target_id = 0
+target_inventory = false
 actions = Array[Resource("res://resources/action.gd")]([SubResource("Resource_8y83u")])
